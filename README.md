@@ -84,3 +84,7 @@ widget/DateLabel.kt      "Today", "Tomorrow 10:00", "Wed, Oct 15"…
 - Sorting by relations isn't possible (API limitation).
 - Android doesn't allow automatic refreshes more often than every 15 min; use ↻ for something more immediate.
 - The token is stored in the app's private storage on the phone and is excluded from backups.
+
+## License
+
+[MIT](LICENSE)
