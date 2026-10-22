@@ -15,6 +15,21 @@ Home-screen widget that shows the **pending** tasks from a Notion database and l
 - Tapping a title opens the page in Notion. ↻ refreshes; it also refreshes on its own every 30 min.
 - Everything is set up in the app: no API keys in the source code or the APK.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/widget1.png" alt="Widget, Today tab" width="250">
+  &nbsp;
+  <img src="docs/screenshots/widget2.png" alt="Widget, Up next tab" width="250">
+  &nbsp;
+  <img src="docs/screenshots/add-task.png" alt="New task dialog" width="250">
+</p>
+<p align="center">
+  <img src="docs/screenshots/settings1.png" alt="Settings: Notion connection and database properties" width="250">
+  &nbsp;
+  <img src="docs/screenshots/settings2.png" alt="Settings: per-view properties and sort" width="250">
+</p>
+
 ## 1. Install
 
 **From Android Studio:** open the folder, enable USB debugging on your phone, connect it and press
