@@ -32,12 +32,20 @@ Home-screen widget that shows the **pending** tasks from a Notion database and l
 
 ## 1. Install
 
-**From Android Studio:** open the folder, enable USB debugging on your phone, connect it and press
-**Run** (or `./gradlew installDebug`).
+**Download (easiest):** on your phone, get the APK from the
+[latest release](https://github.com/IsaacLP/notion-tasks-widget/releases/latest) and open it
+(allow installing apps from your browser or file manager). Requires Android 8.0 or later.
+Newer releases install on top and keep your settings.
 
-**APK:** build it with `./gradlew assembleDebug`, copy `app/build/outputs/apk/debug/app-debug.apk`
-to the phone and open it (allow installing apps from that source). Updates install on top and keep
-your settings.
+**Build it yourself:**
+
+- **From Android Studio:** open the folder, enable USB debugging on your phone, connect it and press
+  **Run** (or `./gradlew installDebug`).
+- **APK:** build it with `./gradlew assembleDebug`, copy `app/build/outputs/apk/debug/app-debug.apk`
+  to the phone and open it.
+
+A self-built app can't be updated with the release APK (or the other way round) because they're
+signed with different keys: uninstall first.
 
 ## 2. Connect Notion
 
