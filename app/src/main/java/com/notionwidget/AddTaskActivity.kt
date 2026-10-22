@@ -55,8 +55,10 @@ class AddTaskActivity : Activity() {
 
         // --- Date: shortcuts plus a picker for any other day.
         layout.addView(label(repo.config.dateProperty))
+        // "Other…" goes on its own line (all four don't fit in one row), outside the RadioGroup,
+        // so the group and it uncheck each other by hand.
+        val other = RadioButton(this).apply { text = "Other…" }
         // RadioGroup only unchecks buttons that have an id; without one "No date" stayed checked.
-        val other = RadioButton(this).apply { id = View.generateViewId(); text = "Other…" }
         val dates = RadioGroup(this).apply {
             orientation = RadioGroup.HORIZONTAL
             listOf<Pair<String, () -> LocalDate?>>(
@@ -67,16 +69,16 @@ class AddTaskActivity : Activity() {
                 val button = RadioButton(context).apply {
                     id = View.generateViewId()
                     this.text = text
-                    setOnClickListener { date = pick(); other.text = "Other…" }
+                    setOnClickListener { date = pick(); other.isChecked = false; other.text = "Other…" }
                 }
                 addView(button)
                 if (i == 0) check(button.id)
             }
-            addView(other)
         }
         var previous = dates.checkedRadioButtonId
-        dates.setOnCheckedChangeListener { _, id -> if (id != other.id) previous = id }
+        dates.setOnCheckedChangeListener { _, id -> if (id != View.NO_ID) previous = id }
         other.setOnClickListener {
+            dates.clearCheck()
             val initial = date ?: LocalDate.now()
             var picked = false
             DatePickerDialog(this, { _, y, m, d ->
@@ -85,10 +87,16 @@ class AddTaskActivity : Activity() {
                 other.text = date!!.format(DateTimeFormatter.ofPattern("MMM d", Locale.ENGLISH))
             }, initial.year, initial.monthValue - 1, initial.dayOfMonth).apply {
                 // If dismissed without picking, go back to the previous option (the date hasn't changed).
-                setOnDismissListener { if (!picked && other.text.toString() == "Other…") dates.check(previous) }
+                setOnDismissListener {
+                    if (!picked && other.text.toString() == "Other…") {
+                        other.isChecked = false
+                        dates.check(previous)
+                    }
+                }
             }.show()
         }
         layout.addView(dates)
+        layout.addView(other)
 
         // --- Select properties (e.g. Tag, Priority): loaded from Notion on open.
         val selectsBox = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
